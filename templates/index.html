@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sreality data</title>
+  </head>
+  <body style="margin: 0; padding: 0">
+    <h1
+      style="
+        font-size: 40px;
+        justify-content: center;
+        display: flex;
+        font-family: sans-serif;
+      "
+    >
+      SCRAPED DATA
+    </h1>
+    <ul
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: sans-serif;
+      "
+    >
+      {% for item in data %}
+      <li
+        style="
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 4rem;
+          margin-bottom: 1rem;
+        "
+      >
+        {{ item[0]["title"]}}
+      </li>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          overflow-x: auto;
+          width: 70%;
+          margin: auto;
+          border-radius: 20px;
+          justify-content: space-between;
+        "
+      >
+        {% for img in item[0]["imgs"][1:-1][1:-1].split('","') %}
+        <img
+          src="{{ img }}"
+          alt="Flat image"
+          style="margin: 0 5px; max-height: 200px; object-fit: contain"
+        />
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      PORT: 5432
+      POSTGRES_HOST: db
+    ports:
+      - "5432:5432"
+
+  flask:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+  db-data:
