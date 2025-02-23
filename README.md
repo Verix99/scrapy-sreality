@@ -7,7 +7,7 @@ This project scrapes the first 500 items (title and image URL) from sreality.cz 
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/Verix99/sreality-scrapy.git
+    git clone https://github.com/Verix99/scrapy-sreality.git
     ```
 
 2. Navigate to the project directory:
