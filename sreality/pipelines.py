@@ -19,7 +19,10 @@ class SrealityPipeline:
         CREATE TABLE IF NOT EXISTS flat(
             id serial PRIMARY KEY,
             title text,
-            imgs text
+            imgs text,
+            detail_url text,
+            price integer
+
         )
         """)
         # Smazání všech  dat z tabulky
@@ -29,9 +32,12 @@ class SrealityPipeline:
 
     def process_item(self, item, spider):
         # Vloží nový záznam do tabulky
-        self.cur.execute(""" insert into flat (title, imgs) values (%s,%s)""", (
+        self.cur.execute(""" insert into flat (title, imgs, detail_url, price) values (%s,%s,%s,%s)""", (
             item["title"],
-            item["imgs"]
+            item["imgs"],
+            item["detail_url"],
+            item["price"]
+
         ))
         # Aktualizuje databázi a vrací položku
         self.connection.commit()

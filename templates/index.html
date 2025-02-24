@@ -1,63 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sreality data</title>
-  </head>
-  <body style="margin: 0; padding: 0">
-    <h1
-      style="
-        font-size: 40px;
-        justify-content: center;
+    <title>Sreality Nabídky</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .property-card {
+        transition: transform 0.2s;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .property-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .gallery-image {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        transition: opacity 0.2s;
+      }
+
+      .gallery-image:hover {
+        opacity: 0.8;
+      }
+
+      .header {
+        background: linear-gradient(to right, #1e88e5, #1565c0);
+        color: white;
+        padding: 2rem 0;
+        margin-bottom: 3rem;
+      }
+      .price-button-container {
         display: flex;
-        font-family: sans-serif;
-      "
-    >
-      SCRAPED DATA
-    </h1>
-    <ul
-      style="
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .price-text {
+        margin-bottom: 0;
+        font-weight: bold;
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        font-family: sans-serif;
-      "
-    >
-      {% for item in data %}
-      <li
-        style="
-          font-size: 30px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-top: 4rem;
-          margin-bottom: 1rem;
-        "
-      >
-        {{ item[0]["title"]}}
-      </li>
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          overflow-x: auto;
-          width: 70%;
-          margin: auto;
-          border-radius: 20px;
-          justify-content: space-between;
-        "
-      >
-        {% for img in item[0]["imgs"][1:-1][1:-1].split('","') %}
-        <img
-          src="{{ img }}"
-          alt="Flat image"
-          style="margin: 0 5px; max-height: 200px; object-fit: contain"
-        />
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <h1 class="text-center mb-0">Nabídky Nemovitostí</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        {% for item in data %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card property-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ item[0]["title"] }}</h5>
+              <div class="image-gallery">
+                {% for img in item[0]["imgs"][1:-1][1:-1].split('","')[:4] %}
+
+                  <img src="{{ img }}" alt="Nemovitost" class="gallery-image" />
+                </a>
+                {% endfor %}
+              </div>
+              <div class="price-button-container">
+                <p class="price-text">
+                  {{ "{:,}".format(item[0]["price"]).replace(',', ' ') }} Kč
+                </p>
+                <a
+                  href="{{ item[0]['detail_url'] }}"
+                  class="btn btn-primary btn-sm"
+                  target="_blank"
+                >
+                  Více informací
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         {% endfor %}
       </div>
-      {% endfor %}
-    </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   </body>
 </html>

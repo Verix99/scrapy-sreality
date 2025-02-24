@@ -9,3 +9,6 @@ from scrapy.item import Item, Field
 class SrealityItem(Item):
     title = Field()
     imgs = Field()
+    detail_url = Field()
+    price = Field()
+
