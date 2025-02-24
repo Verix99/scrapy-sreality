@@ -13,7 +13,7 @@ This project scrapes the first 500 items (title and image URL) from sreality.cz 
 2. Navigate to the project directory:
 
     ```bash
-    cd sreality-scrapy
+    cd scrapy-sreality
     ```
 
 3. Run:
